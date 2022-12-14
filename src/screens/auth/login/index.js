@@ -117,8 +117,8 @@ const Login = () => {
           <Text style={styles.textForgot}>Quên mật khẩu?</Text>
         </TouchableOpacity>
       </View>
-      <CustomNotiModal />
-      {loading && <MyLoading />}
+    
+      
     </View>
   );
 };
