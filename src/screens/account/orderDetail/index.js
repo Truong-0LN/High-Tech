@@ -45,6 +45,7 @@ const OrderDetail = props => {
       });
   }, [orderId, isFocused]);
   const dayCreate = order?.createdAt;
+  console.log(orderId);
   const onCancle = () => {
     dispatch(getChangeLoadingRequest());
 

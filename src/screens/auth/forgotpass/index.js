@@ -1,4 +1,20 @@
-
+import {StyleSheet, Text, ToastAndroid, View} from 'react-native';
+import React, {useCallback, useEffect, useState} from 'react';
+import {styles} from './styles';
+import Lottie from 'lottie-react-native';
+import Header from '../../../components/header';
+import CustomTextInput from '../../../components/customTextInput';
+import CustomButton from '../../../components/customButton';
+import {useNavigation} from '@react-navigation/native';
+import {Formik} from 'formik';
+import {validateEmailSchema} from '../../../utils/schema';
+import {forgotPasswordApi, veryfiCodedApi} from '../../../services/api/auth';
+import {
+  CodeField,
+  Cursor,
+  useBlurOnFulfill,
+  useClearByFocusCell,
+} from 'react-native-confirmation-code-field';
 import {AppTheme} from '../../../config/AppTheme';
 import IMAGES from '../../../assets/images';
 import {useDispatch} from 'react-redux';
@@ -53,7 +69,25 @@ const ForgotPassword = () => {
     }
     return () => clearTimeout(timer);
   }, [seconds]);
-
+  const onReSendCode = useCallback(() => {
+    dispatch(getChangeLoadingRequest());
+    forgotPasswordApi({email: email})
+      .then(res => {
+        setSeconds(59);
+        dispatch(getChangeLoadingSuccess());
+        ToastAndroid.show(
+          'Gửi code thành công vui lòng kiểm tra email',
+          ToastAndroid.SHORT,
+        );
+      })
+      .catch(e => {
+        console.log('e ', e);
+        dispatch(getChangeLoadingSuccess());
+        showModal({
+          title: e.response?.data.message,
+        });
+      });
+  }, [user, email]);
   const onSendVerify = () => {
     dispatch(getChangeLoadingRequest());
     veryfiCodedApi({
@@ -145,6 +179,23 @@ const ForgotPassword = () => {
             </View>
           </View>
         )}
-}
+
+        <View style={styles.viewOr}>
+          <Text style={styles.textLine} />
+          <Text style={styles.textOR}>OR</Text>
+          <Text style={styles.textLine} />
+        </View>
+
+        <Text style={styles.text}>Bạn chưa có tài khoản?</Text>
+        <CustomButton
+          title={'Đăng kí'}
+          onPress={() => navigation.navigate('Register')}
+          containerStyles={styles.containerRegister}
+          textStyles={styles.textRegister}
+        />
+      </View>
+    </View>
+  );
+};
 
 export default ForgotPassword;
