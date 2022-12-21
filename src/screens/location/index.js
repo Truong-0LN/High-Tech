@@ -125,7 +125,7 @@ useEffect(() => {
 
   const onChooseAddress = useCallback(() => {
     console.log(value);
-    navigation.navigate('SettingAddress', {address: value});
+    navigation.navigate('SettingAddress', {address: value, position: makerPosition});
   }, [value, place]);
   return (
     <View style={styles.container}>
