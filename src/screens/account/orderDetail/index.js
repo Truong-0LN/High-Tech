@@ -44,6 +44,7 @@ const OrderDetail = props => {
         });
       });
   }, [orderId, isFocused]);
+  console.log('order ', order);
   const dayCreate = order?.createdAt;
   console.log(orderId);
   const onCancle = () => {

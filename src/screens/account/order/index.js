@@ -1,4 +1,4 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Dimensions, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Header from '../../../components/header';
 import ItemOrder from '../components/ItemOrder';
@@ -45,15 +45,23 @@ const MyOrder = () => {
       <ScrollView
         style={styles.body}
         contentContainerStyle={{paddingBottom: verticalScale(20)}}>
-        {listOrder.reverse().map(item => {
-          return (
-            <ItemOrder
-              key={item._id}
-              order={item}
-              onPress={() => onGoDetail(item._id)}
-            />
-          );
-        })}
+        {listOrder?.length > 0 ? (
+          <>
+            {listOrder.reverse().map(item => {
+              return (
+                <ItemOrder
+                  key={item._id}
+                  order={item}
+                  onPress={() => onGoDetail(item._id)}
+                />
+              );
+            })}
+          </>
+        ) : (
+          <View style={styles.emptyOrder}>
+            <Text style={styles.text}>Chưa có đơn hàng nào</Text>
+          </View>
+        )}
       </ScrollView>
     </View>
   );
@@ -62,21 +70,19 @@ const MyOrder = () => {
 export default MyOrder;
 
 const styles = StyleSheet.create({
-  loading: {
-    width: '100%',
-    height: '100%',
-    zIndex: 11,
-    backgroundColor: 'rgba(255, 255, 255,0.6)',
+  text:{
+    fontSize: AppTheme.FontSize.Medium,
+    color: AppTheme.Colors.Dark,
+    fontWeight: '700'
   },
-  viewLoading: {
+  emptyOrder:{
     width: '100%',
-    height: '100%',
-    position: 'absolute',
-    top: 0,
-    zIndex: 10,
-    justifyContent: 'center',
+    height: Dimensions.get('window').height /2,
+    justifyContent: 'flex-end',
     alignItems: 'center',
+    paddingBottom: verticalScale(60)
   },
+
   body: {
     backgroundColor: AppTheme.Colors.White,
     flex: 1,

@@ -2,20 +2,15 @@ import {
   View,
   Text,
   Image,
-  Modal,
-  TouchableOpacity,
-  TextInput,
+  ScrollView,
 } from 'react-native';
 import React, {useState, useEffect, useCallback} from 'react';
-import Header from '../../components/header';
 import {styles} from './styles';
-import {DATA_ACCOUNT} from '../../services/fakeApi/fakeAPI';
 import ItemAccount from './components/ItemAccount';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUserSelector} from '../../redux/auth/selector';
 import CustomButton from '../../components/customButton';
-import ItemProfile from './profile/components/ItemProfile';
 import AppIcon from '../../assets/icons';
 import {getUserInfoRequest, logoutRequest} from '../../redux/auth/action';
 
@@ -27,9 +22,9 @@ const Account = () => {
   const [fullname, setFullname] = useState(userInfo.fullname);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getUserInfoRequest())    
-  }, [])
-  console.log(userInfo);
+    dispatch(getUserInfoRequest())   
+   
+  }, []);
   const onGo = value => {
     switch (value) {
       case 'Tài khoản':
@@ -39,7 +34,7 @@ const Account = () => {
         navigation.navigate('MyOrder');
         break;
       case 'Địa chỉ':
-        navigation.navigate('MyAddress', {isDelete: true});
+        navigation.navigate('MyAddress', {isDelete: true, fromTo: 'account'});
         break;
       case 'Liên kết':
         navigation.navigate('Payment');
@@ -58,7 +53,7 @@ const Account = () => {
     dispatch(logoutRequest(() => navigation.navigate('SplashScreen')));
   }, []);
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.avatar}>
         <Image
           source={{uri: userInfo?.avatar}}
@@ -96,7 +91,7 @@ const Account = () => {
         />
       </View>
 
-    </View>
+    </ScrollView>
   );
 };
 
