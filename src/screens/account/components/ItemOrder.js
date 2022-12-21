@@ -6,18 +6,10 @@ import {formatMoney} from '../../../helpers/formatMoney';
 import {format} from 'date-fns';
 const ItemOrder = ({onPress, order}) => {
   let day = format(new Date(order?.createdAt), 'MM/dd/yyyy');
-  let status;
-  if (order?.status === 'Not Processed') {
-    status = 'Đang được xử lý';
-  } else if (order?.status === 'Processing') {
-    status = 'Đã được xử lý';
-  } else if (order?.status === 'Cancelled') {
-    status = 'Đơn hàng đã bị hủy';
-  } else if (order?.status === 'Shipping'){
-    status = 'Đang vận chuyển';
-  } else {
-    status = order?.status;
-  }
+  let total = 0 ;
+   order?.items.map(i=>{
+    total += i?.quantity;
+   });
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Text style={styles.textTitle}>Thông tin đơn hàng</Text>
@@ -27,11 +19,11 @@ const ItemOrder = ({onPress, order}) => {
       </View>
       <View style={styles.fdl}>
         <Text style={styles.textDate}>Trạng thái</Text>
-        <Text style={styles.textDate}>{status}</Text>
+        <Text style={styles.textDate}>{order?.message}</Text>
       </View>
       <View style={styles.fdl}>
         <Text style={styles.textDate}>Sản phẩm</Text>
-        <Text style={styles.textDate}>{order?.items?.length} sản phẩm</Text>
+        <Text style={styles.textDate}>{total} sản phẩm</Text>
       </View>
       <View style={styles.fdl}>
         <Text style={styles.textDate}>Tổng cộng</Text>

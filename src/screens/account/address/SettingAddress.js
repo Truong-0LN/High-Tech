@@ -15,7 +15,7 @@ import {showModal} from '../../../components/customNotiModal';
 import MyLoading from '../../../components/loading';
 
 const SettingAddress = props => {
-  const {address, index, name, phone, edit,itemAddress} = props.route.params;
+  const {address, index, name, phone, edit,itemAddress, position} = props?.route?.params; 
   const userInfor = useSelector(getUserSelector);
   const navigation = useNavigation();
   const [addressInput, setAddressInput] = useState(address);
@@ -29,7 +29,6 @@ const SettingAddress = props => {
       setIsDefault(true);
     }
   }, [isFocused])
-  
   const onSaveAddress = values => {
     setIsLoading(true);
     if (isDefault) {
@@ -45,13 +44,13 @@ const SettingAddress = props => {
       isDefault: isDefault,
       name: values.fullname,
       phone: values.phone,
+      latlng: [position.latitude, position.longitude]
     });
 
     updateProfileApi({
       information: information,
     })
       .then(res => {
-        console.log('ré ',res);
         setIsLoading(false);
         showModal({
           title: 'Thêm địa chỉ mới thành công',
@@ -59,12 +58,11 @@ const SettingAddress = props => {
         });
       })
       .catch(error => {
-        console.log('error ', error);
         setIsLoading(false);
         showModal({
           title: 'Đã có lỗi xảy ra!',
           message: 'Xin vui lòng thử lại sau giây lát',
-          onConfirmPress: () => navigation.replace('MyAddress'),
+          onConfirmPress: () => navigation.navigate('MyAddress'),
         });
       });
   };

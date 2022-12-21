@@ -15,6 +15,7 @@ import {
   getChangeLoadingRequest,
   getChangeLoadingSuccess,
 } from '../../../redux/loading/action';
+import { getChangeShippingAddressRequest } from '../../../redux/location/action';
 
 const MyAddress = props => {
   const navigation = useNavigation();
@@ -27,14 +28,12 @@ const MyAddress = props => {
   console.log('from To ', fromTo);
   const userInfo = useSelector(getUserSelector);
   const onClickAddress = (_item, _index) => {
-    if (fromTo === 'Cart') {
-      navigation.navigate('Cart', {itemChooseAddress: _item});
+    if (fromTo === 'account') {
+      
+      
     } else {
-      // navigation.navigate('SettingAddress', {
-      //   itemAddress: _item,
-      //   edit: true,
-      //   index: _index,
-      // });
+      dispatch(getChangeShippingAddressRequest(_item))
+      navigation.navigate('Cart');
     }
   };
   const renderItem = ({item, index}) => {
