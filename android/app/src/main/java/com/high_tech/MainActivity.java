@@ -3,7 +3,8 @@ package com.high_tech;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
-
+import vn.zalopay.sdk.ZaloPaySDK;
+import android.content.Intent;
 public class MainActivity extends ReactActivity {
 
   /**
@@ -45,4 +46,11 @@ public class MainActivity extends ReactActivity {
       return BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
     }
   }
+
+   @Override
+    public void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        ZaloPaySDK.getInstance().onResult(intent);
+    }
+
 }

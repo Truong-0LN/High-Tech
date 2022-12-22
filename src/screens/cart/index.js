@@ -80,6 +80,8 @@ const Cart = props => {
   const [coupon, setCoupon] = useState('');
   const [couponMoney, setCouponMoney] = useState(0);
   const appState = useRef(AppState.currentState);
+  const ref = useRef();
+
   useEffect(() => {
     if (shippingAddress.address !== '') {
       setMyAddress(shippingAddress);
@@ -94,7 +96,6 @@ const Cart = props => {
         product: listCart[index].product._id,
         quantity: listCart[index].quantity,
       };
-      console.log('item, ', item);
       arrItem.push(item);
     }
     let couponActive = '';
@@ -129,7 +130,6 @@ const Cart = props => {
         });
       });
   };
-  const ref = useRef();
   useEffect(() => {
     ref.current = payZaloBridgeEmitter.addListener(
       'EventPayZalo',

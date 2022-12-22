@@ -33,7 +33,7 @@ export const rootReducer = combineReducers({
   bannerReducer,
   auth: persistReducer(authPersistConfig, authReducer),
   cartReducer,
-  location: persistReducer(locationPersistConfig, locationReducer),
+  locationReducer,
   loadingReducer,
   notificationReducer,
   brandReducer,

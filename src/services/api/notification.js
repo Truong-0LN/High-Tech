@@ -5,5 +5,5 @@ export const postDeviceTokenApi = deviceToken => {
 };
 
 export const getNotificationApi = (page = 1, limit = 20) => {
-  return axiosClient.get(`/notification/?page=${page}&${limit}`);
+  return axiosClient.get(`/notification/me/?page=${page}&${limit}`);
 };

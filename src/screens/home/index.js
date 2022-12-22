@@ -23,6 +23,7 @@ import SwiperFlatList from 'react-native-swiper-flatlist';
 import {getListCategoriesRequest} from '../../redux/categories/action';
 import PlaceholderListBanner from '../../components/placeholderBanner';
 import PlaceholderProductOnHome from '../../components/placeholderProductOnHome';
+import { getChangeLoadingRequest } from '../../redux/loading/action';
 
 const Home = () => {
   const navigation = useNavigation();
@@ -64,7 +65,7 @@ const Home = () => {
     dispatch(getAllProductsRequest());
     dispatch(getListCategoriesRequest());
     dispatch(getListBannerRequest());
-    wait(2000).then(() => setRefreshing(false));
+    wait(2000).then(() =>{ setRefreshing(false)});
   }, []);
   return (
     <ScrollView

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "967433076917",
+    "project_id": "high-tech-babbb",
+    "storage_bucket": "high-tech-babbb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967433076917:android:c63c52615bfdc5aa073efc",
+        "android_client_info": {
+          "package_name": "com.finalproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "967433076917-j75b9e9s8a58j9tjrjco7tvjc1op00et.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlgZfjcIxn2ua7cKIClnwcMt7J9GfwJY0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967433076917-j75b9e9s8a58j9tjrjco7tvjc1op00et.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
