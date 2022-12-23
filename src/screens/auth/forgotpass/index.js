@@ -45,16 +45,13 @@ const ForgotPassword = () => {
   const onSendEmail = useCallback(values => {
     setEmail(values.email);
     dispatch(getChangeLoadingRequest());
-    console.log('aabbbb');
     forgotPasswordApi({email: values.email})
       .then(res => {
         setIsShow(false);
         dispatch(getChangeLoadingSuccess());
         setUser(res.data.user);
-        console.log('res -> ', res);
       })
       .catch(e => {
-        console.log('message error -> ', e);
         ToastAndroid.show(e.response?.data.message, ToastAndroid.SHORT);
         dispatch(getChangeLoadingSuccess());
       });
@@ -81,7 +78,6 @@ const ForgotPassword = () => {
         );
       })
       .catch(e => {
-        console.log('e ', e);
         dispatch(getChangeLoadingSuccess());
         showModal({
           title: e.response?.data.message,
@@ -102,7 +98,6 @@ const ForgotPassword = () => {
         });
       })
       .catch(e => {
-        console.log('e ', e);
         dispatch(getChangeLoadingSuccess());
 
         ToastAndroid.show(e.response?.data.message, ToastAndroid.SHORT);

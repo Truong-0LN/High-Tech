@@ -1,9 +1,4 @@
-import {
-  View,
-  Text,
-  Image,
-  ScrollView,
-} from 'react-native';
+import {View, Text, Image, ScrollView} from 'react-native';
 import React, {useState, useEffect, useCallback} from 'react';
 import {styles} from './styles';
 import ItemAccount from './components/ItemAccount';
@@ -13,6 +8,7 @@ import {getUserSelector} from '../../redux/auth/selector';
 import CustomButton from '../../components/customButton';
 import AppIcon from '../../assets/icons';
 import {getUserInfoRequest, logoutRequest} from '../../redux/auth/action';
+import {showModal} from '../../components/customNotiModal';
 
 const Account = () => {
   const navigation = useNavigation();
@@ -22,8 +18,7 @@ const Account = () => {
   const [fullname, setFullname] = useState(userInfo.fullname);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getUserInfoRequest())   
-   
+    dispatch(getUserInfoRequest());
   }, []);
   const onGo = value => {
     switch (value) {
@@ -39,7 +34,7 @@ const Account = () => {
       case 'Liên kết':
         navigation.navigate('Payment');
         break;
-        case 'Thông báo':
+      case 'Thông báo':
         navigation.navigate('Notification');
         break;
       default:
@@ -55,10 +50,7 @@ const Account = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.avatar}>
-        <Image
-          source={{uri: userInfo?.avatar}}
-          style={styles.img}
-        />
+        <Image source={{uri: userInfo?.avatar}} style={styles.img} />
         <Text style={styles.textName}>{userInfo.fullname}</Text>
         <Text style={styles.textEmail}>{userInfo.email}</Text>
         <CustomButton
@@ -78,11 +70,27 @@ const Account = () => {
           onPress={() => onGo('Địa chỉ')}
           title="Địa chỉ"
         />
-        <ItemAccount icon={AppIcon.IconNotification}
-        onPress={() => onGo('Thông báo')}
-        title="Thông báo" />
-        <ItemAccount icon={AppIcon.IconPayment} title="Liên kết thẻ" />
-        <ItemAccount icon={AppIcon.IconHelp} title="Trợ giúp" />
+        <ItemAccount
+          icon={AppIcon.IconNotification}
+          onPress={() => onGo('Thông báo')}
+          title="Thông báo"
+        />
+        <ItemAccount
+          icon={AppIcon.IconPayment}
+          onPress={() =>
+            showModal({
+              title: 'Tính năng chưa được hổ trợ',
+            })
+          }
+          title="Liên kết thẻ"
+        />
+        <ItemAccount icon={AppIcon.IconHelp}
+         onPress={() =>
+          showModal({
+            title: 'Tính năng chưa được hổ trợ',
+          })
+        }
+        title="Trợ giúp" />
         <ItemAccount
           icon={AppIcon.IconLogout}
           textStyle={{color: '#FF3D00'}}
@@ -90,7 +98,6 @@ const Account = () => {
           onPress={onLogout}
         />
       </View>
-
     </ScrollView>
   );
 };
