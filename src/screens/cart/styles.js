@@ -3,20 +3,18 @@ import {AppTheme} from '../../config/AppTheme';
 import {scale, verticalScale} from '../../utils/scale';
 
 export const styles = StyleSheet.create({
-  containerStyle:{
-    backgroundColor: AppTheme.Colors.Grey
+  containerStyle: {
+    backgroundColor: AppTheme.Colors.Grey,
   },
   welcomeHead: {
     fontSize: 20,
     textAlign: 'center',
     marginTop: 50,
-
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
     margin: 20,
-
   },
   instructions: {
     textAlign: 'center',
@@ -26,16 +24,16 @@ export const styles = StyleSheet.create({
   inputText: {
     marginBottom: 20,
     fontSize: 20,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   ////////////////////////////////////////////////
-  textNoSupport:{
+  textNoSupport: {
     fontSize: AppTheme.FontSize.Medium,
     fontFamily: AppTheme.Fonts.SemiBold,
     letterSpacing: 0.5,
     color: AppTheme.Colors.Red,
-    textAlign:'center',
-    marginBottom: verticalScale(15)
+    textAlign: 'center',
+    marginBottom: verticalScale(15),
   },
   touchPayment: {
     flexDirection: 'row',
@@ -64,7 +62,7 @@ export const styles = StyleSheet.create({
     fontFamily: AppTheme.Fonts.SemiBold,
     letterSpacing: 0.5,
     color: AppTheme.Colors.Dark,
-    marginLeft: scale(16)
+    marginLeft: scale(16),
   },
   touchPaymentMethod: {
     flexDirection: 'row',
@@ -96,7 +94,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 5,
     paddingHorizontal: scale(16),
-    paddingBottom: verticalScale(20)
+    paddingBottom: verticalScale(20),
   },
   modalContainer: {
     flex: 1,
@@ -239,5 +237,15 @@ export const styles = StyleSheet.create({
     color: AppTheme.Colors.Dark,
     textAlignVertical: 'center',
     marginTop: verticalScale(8),
+  },
+  viewNoSp: {
+    alignItems: 'flex-end',
+    paddingHorizontal: scale(12),
+  },
+  textNoSp: {
+    fontSize: scale(12),
+    fontFamily: AppTheme.Fonts.Medium,
+    letterSpacing: 0.5,
+    color: AppTheme.Colors.Red,
   },
 });

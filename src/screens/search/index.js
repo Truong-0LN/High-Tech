@@ -63,9 +63,6 @@ const SearchScreen = () => {
         textPlaceHolder={'Tìm kiếm'}
         value={title}
         onChangeText={text => setTitle(text)}
-        // onFocus={() => {
-        //   console.log('on focused');
-        // }}
         autoFocus={true}
         onEndEditing={findProduct}
         containerTextInputStyle={styles.containerTextInputStyle}

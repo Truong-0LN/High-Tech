@@ -37,6 +37,7 @@ import withLoading from '../../HOC/withLoading';
 import {GET_PRODUCT_REQUEST} from '../../redux/products/actionType';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 import {getListCategoriesSelector} from '../../redux/categories/selector';
+import IMAGES from '../../assets/images';
 const ProductDetail = props => {
   const productId = props.route.params.productId;
   const navigation = useNavigation();
@@ -47,6 +48,7 @@ const ProductDetail = props => {
   const [loading, setLoading] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [count, setCount] = useState(0);
+  const [valid, setValid] = useState(true);
   useEffect(() => {
     dispatch(getProductRequest(productId));
     setIsFavorite(product.favorite);
@@ -73,7 +75,6 @@ const ProductDetail = props => {
       })
       .catch(error => {
         setLoading(false);
-        console.log('onChangeFavorite -> ', error);
       });
   }, [loading, product, isFavorite]);
   const addToCart = useCallback(
@@ -117,7 +118,8 @@ const ProductDetail = props => {
                 return (
                   <View style={styles.viewCarousel}>
                     <Image
-                      source={{uri: item}}
+                      onError={() => setValid(false)}
+                      source={{uri: valid ? item : IMAGES.ERRORIMAGE}}
                       resizeMode="contain"
                       style={styles.itemImage}
                     />

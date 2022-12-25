@@ -33,16 +33,16 @@ function* addOneProductToCartHandle(action) {
       title: error.response?.data.message,
     })
     yield put(addOneProductToCartFailed());
-    console.log('addOneProductToCartHandle -> ', error);
   }
 }
 ///////////////////////////////// add list product to cart  //////////////////////////////
 function* addProductsToCartHandle(action) {
   try {
     const res = yield call(addProductsToCartApi, action?.payload);
-    console.log('res saga ', res);
   } catch (error) {
-    console.log('addProductsToCart -> ', error);
+    showModal({
+      title: 'Có lỗi gì đó xảy ra !!!'
+    })
   }
 }
 ///////////////////////////////// get all cart  //////////////////////////////
@@ -52,8 +52,10 @@ function* getAllCartHandle() {
     yield put(getAllCartSuccess({listCart: res?.data}));
     yield put(getChangeLoadingSuccess());
   } catch (error) {
-    console.log('getAllCartHandle -> ', error);
     yield put(getChangeLoadingSuccess());
+    showModal({
+      title: 'Có lỗi gì đó xảy ra !!!'
+    })
   }
 }
 ///////////////////////////////// delete product on cart //////////////////////////////
@@ -61,10 +63,12 @@ function* deleteProductOnCartHandle(action) {
   const {onSuccess} = action;
   try {
     const res = yield call(deleteProductOnCartApi, action.payload);
-    console.log('res -> ', res);
     onSuccess(action);
   } catch (error) {
-    console.log('deleteProductOnCart -> ', error);
+    yield put(getChangeLoadingSuccess());
+    showModal({
+      title: 'Có lỗi gì đó xảy ra !!!'
+    })
   }
 }
 

@@ -1,4 +1,5 @@
 import {all, call, put, takeLatest} from 'redux-saga/effects';
+import { showModal } from '../../components/customNotiModal';
 import {getBannerApi} from '../../services/api/banner';
 import {getListBannerSuccess} from './action';
 import {GET_CHOOSE_BANNER_REQUEST, GET_LIST_BANNER_REQUEST} from './actionType';
@@ -8,7 +9,10 @@ function* getListBannerHandle() {
     const res = yield call(getBannerApi);
     yield put(getListBannerSuccess(res.data));
   } catch (error) {
-    console.log('getListBannerHandle -> ', error);
+
+    showModal({
+      title: 'Có lỗi gì đó xảy ra !!!'
+    })
   }
 }
 function* chooseBannerHandle(action) {

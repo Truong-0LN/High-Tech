@@ -1,5 +1,5 @@
 import {View, Text, Image, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {styles} from './styles';
 import IMAGES from '../../assets/images';
 import {SvgXml} from 'react-native-svg';
@@ -19,12 +19,20 @@ const CustomProduct = ({
   onRemove,
   containerStyle,
 }) => {
+  const [valid, setValid] = useState(true);
   return (
-    <TouchableOpacity style={[styles.container, containerStyle]} onPress={onGoDetail}>
+    <TouchableOpacity
+      style={[styles.container, containerStyle]}
+      onPress={onGoDetail}>
       <View>
         {image && (
           <Image
-            source={{uri: image.toString()}}
+            onError={() => setValid(false)}
+            source={{
+              uri: valid
+                ? image.toString()
+                : 'https://lh3.googleusercontent.com/QvkjL4K3rTX5KnVT…72fU4zJf82mPVrJS5Wm9Wgz9CwrlPLb8Bo7cR8aLo=w500-rw',
+            }}
             resizeMode="cover"
             style={styles.img}
           />
@@ -33,14 +41,20 @@ const CustomProduct = ({
       <Text style={styles.textName} numberOfLines={2}>
         {title}
       </Text>
-      {salePrice && (
+      {/* {salePrice && (
+        <Text style={styles.textLastPrice}>{formatMoney(1)}
+        </Text>
+      )} */}
+      {salePercent > 0 ? (
         <Text style={styles.textLastPrice}>{formatMoney(salePrice)}</Text>
+      ) : (
+        <Text style={styles.textLastPrice}>{formatMoney(costPrice)}</Text>
       )}
       <View style={styles.fld}>
-        <View style={styles.viewSale}>
+      { salePercent> 0 &&  <View style={styles.viewSale}>
           <Text style={styles.textFirstPrice}>{formatMoney(costPrice)}</Text>
           <Text style={styles.textSale}> {salePercent}%</Text>
-        </View>
+        </View>}
         {remove && (
           <TouchableOpacity>
             <SvgXml
@@ -56,4 +70,4 @@ const CustomProduct = ({
   );
 };
 
-export default CustomProduct;
+export default React.memo(CustomProduct);

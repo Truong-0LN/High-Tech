@@ -99,7 +99,6 @@ useEffect(() => {
 
   const onBackCurrentPosition = () => {
     Geolocation.getCurrentPosition(pos => {
-      console.log('aasdas');
       setRegion({
         latitude: pos.coords.latitude,
         longitude: pos.coords.longitude,
@@ -124,7 +123,6 @@ useEffect(() => {
   };
 
   const onChooseAddress = useCallback(() => {
-    console.log(value);
     navigation.navigate('SettingAddress', {address: value, position: makerPosition});
   }, [value, place]);
   return (

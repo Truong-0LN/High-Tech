@@ -15,13 +15,16 @@ import {
 ///////////////////////////////// get change one address //////////////////////////////////
 function* getChangeOneAddressHandle(action) {
   try {
-    console.log(action);
+   
     yield put(getChangeShippingAddressSuccess({
       shippingAddress: action?.payload,
     }));
   } catch (error) {
     yield put(getChangeShippingAddressFailed());
-    console.log('getChangeOneAddressHandle -> ', error);
+    yield put(getChangeLoadingSuccess());
+    showModal({
+      title: 'Có lỗi gì đó xảy ra !!!'
+    })
   }
 }
 ///////////////////////////////// get delete one address //////////////////////////////////
@@ -32,7 +35,10 @@ function* getDeleteOneAddressHandle(action) {
       listLocation: action.payload.listLocation,
     });
   } catch (error) {
-    console.log('getDeleteOneAddressHandle -> ', error);
+    yield put(getChangeLoadingSuccess());
+    showModal({
+      title: 'Có lỗi gì đó xảy ra !!!'
+    })
   }
 }
 ///////////////////////////////// get choose one address from list location //////////////////////////////////
@@ -49,7 +55,10 @@ function* chooseLocationHandle(action) {
       }),
     );
   } catch (error) {
-    console.log('choose location -> ', error);
+    yield put(getChangeLoadingSuccess());
+    showModal({
+      title: 'Có lỗi gì đó xảy ra !!!'
+    })
   }
 }
 //////////////////////////////// function saga //////////////////////////////////////////////////////////////////

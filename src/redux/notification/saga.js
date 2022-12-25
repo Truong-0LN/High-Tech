@@ -10,12 +10,15 @@ import {
 } from './actionType';
 
 function* postDeviceTokenHandle(action) {
-  console.log(action?.payload);
+ 
   try {
     const res = yield call(postDeviceTokenApi, {deviceToken: action?.payload});
     yield put(postDeviceTokenSuccess(res.data.deviceToken));
   } catch (error) {
-    console.log('post device token ', error);
+    yield put(getChangeLoadingSuccess());
+    showModal({
+      title: 'Có lỗi gì đó xảy ra !!!'
+    })
   }
 }
 
@@ -26,7 +29,10 @@ function* getNoticationHandle() {
     const res = yield call(getNotificationApi);
     yield put(getNotificationSuccess(res.data));
   } catch (error) {
-    console.log('get notification ', error);
+    yield put(getChangeLoadingSuccess());
+    showModal({
+      title: 'Có lỗi gì đó xảy ra !!!'
+    })
   }
 }
 

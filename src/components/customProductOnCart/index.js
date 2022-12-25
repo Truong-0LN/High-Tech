@@ -71,7 +71,7 @@ const ProducOnCart = ({
               <View style={[styles.viewPlus]}>
                 <Pressable
                   onPress={() =>
-                    checkOutStock
+                    item?.outOfStock
                       ? onUpdateQuantity(
                           item.product._id,
                           item?.product?.quantity,
@@ -88,7 +88,7 @@ const ProducOnCart = ({
                 <Text style={styles.textQuantity}>{item.quantity}</Text>
                 <Pressable
                   onPress={() =>
-                    checkOutStock
+                    item?.outOfStock
                       ? onUpdateQuantity(
                           item.product._id,
                           item?.product?.quantity,
@@ -112,7 +112,7 @@ const ProducOnCart = ({
           </View>
         ) : null}
       </View>
-      {checkOutStock && (
+      {item?.outOfStock && (
         <Text style={styles.textError}>Sản phẩm không đủ số lượng</Text>
       )}
     </TouchableOpacity>

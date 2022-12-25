@@ -1,5 +1,5 @@
 import axiosClient from '../../utils/axiosClient';
-export const getAllProductsApi = (page = 1, limit = 30) => {
+export const getAllProductsApi = (page = 1, limit = 50) => {
   return axiosClient.get(`/product?page=${page}&limit=${limit}`);
 };
 export const getProductApi = id => {

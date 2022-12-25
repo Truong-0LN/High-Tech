@@ -49,7 +49,7 @@ export default function AppRouter() {
     requestUserPermission();
     messaging().onMessage(remoteMessage => {
       try {
-        console.log('firebase -> ',remoteMessage);
+       
         let title = remoteMessage.data?.title;
         let body = remoteMessage.data?.title;
         onDisplayNotification(title, body);
@@ -74,9 +74,7 @@ export default function AppRouter() {
             PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
           );
           if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            console.log('location yes');
           } else {
-            console.log('location permission denied');
           }
         } catch (err) {
           console.warn(err);

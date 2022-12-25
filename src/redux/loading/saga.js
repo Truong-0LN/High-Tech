@@ -9,7 +9,10 @@ function* getChangeLoading(action) {
   try {
     // yield put(getChangeLoadingSuccess(action.payload));
   } catch (error) {
-    console.log('getChangeLoading -> ', error);
+    yield put(getChangeLoadingSuccess());
+    showModal({
+      title: 'Có lỗi gì đó xảy ra !!!'
+    })
   }
 }
 

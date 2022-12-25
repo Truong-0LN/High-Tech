@@ -85,6 +85,7 @@ const Profile = () => {
             onConfirmPress: () => navigation.goBack(),
           });
           dispatch(getChangeLoadingSuccess());
+          dispatch(getUserInfoRequest());
         })
         .catch(err => {
           dispatch(getChangeLoadingSuccess());
@@ -156,11 +157,9 @@ const Profile = () => {
                   values.fullname !== initialValue.fullname
                 ) {
                   setIsUpdate(true);
-                  console.log('aaaaaaaaaaa');
                 } else {
                   false;
                 }
-                console.log('update ', isUpdate);
               }, [values]);
 
               return (

@@ -7,7 +7,6 @@ import {scale, verticalScale} from '../utils/scale';
 
 function withLoading(WrappedComponent, actionTypes) {
   function HOC({isLoading, ...props}) {
-    console.log('aaaaaaaaaaaaaaaaa');
     return (
       <View style={styles.main}>
         <WrappedComponent {...props} />

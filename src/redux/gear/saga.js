@@ -7,14 +7,20 @@ function* getListGearToCategoriesHandle(action) {
   try {
     yield put(getListGearSuccess(action?.payload));
   } catch (error) {
-    console.log('getListGearToCategoriesHandle -> ', error);
+    yield put(getChangeLoadingSuccess());
+    showModal({
+      title: 'Có lỗi gì đó xảy ra !!!'
+    })
   }
 }
 function* chooseGearHandle(action) {
   try {
     yield put(getChooseGearSuccess(action?.payload));
   } catch (error) {
-    console.log('chooseGearHandle -> ', error);
+    yield put(getChangeLoadingSuccess());
+    showModal({
+      title: 'Có lỗi gì đó xảy ra !!!'
+    })
   }
 }
 

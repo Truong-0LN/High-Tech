@@ -8,7 +8,10 @@ function* getListCategoriesHandle() {
     const res = yield call(getAllCategoriesApi);
     yield put(getListCategoriesSuccess(res));
   } catch (error) {
-    console.log('getListCategoriesHandle -> ', error);
+    yield put(getChangeLoadingSuccess());
+    showModal({
+      title: 'Có lỗi gì đó xảy ra !!!'
+    })
   }
 }
 

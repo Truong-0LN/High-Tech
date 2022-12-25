@@ -13,7 +13,7 @@ const onDisplayNotification = async (title, body) => {
     body: body,
     android: {
       channelId,
-      smallIcon: '@mipmap/ic_launcher_round',
+      smallIcon: '@mipmap/ic_launcher',
       color: AppTheme.Colors.Orange,
       sound: 'notification',
     },

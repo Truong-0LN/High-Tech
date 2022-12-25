@@ -10,16 +10,10 @@ import {getNotificationRequest} from '../../redux/notification/action';
 import {getChangeLoading} from '../../redux/loading/selector';
 import MyLoading from '../../components/loading';
 import {getChangeLoadingRequest} from '../../redux/loading/action';
+import { useNavigation } from '@react-navigation/native';
 
-const renderItem = ({item}) => {
-  return (
-    <ItemNotifi
-      title={item.title}
-      description={item.description}
-      date_created={item.createdAt}
-    />
-  );
-};
+
+
 const Notification = () => {
   const listNotification = useSelector(getNotificationSelector);
   const loading = useSelector(getChangeLoading);
@@ -28,7 +22,19 @@ const Notification = () => {
     dispatch(getNotificationRequest());
     dispatch(getChangeLoadingRequest());
   }, [dispatch]);
-
+  const navigation = useNavigation();
+  const renderItem = ({item}) => {
+    console.log(item?.information.order
+      );
+    return (
+      <ItemNotifi
+        title={item.title}
+        description={item.description}
+        date_created={item.createdAt}
+        onPress={()=>navigation.navigate('OrderDetail', {orderId:  item.information.order})}
+      />
+    );
+  };
   return (
     <View style={styles.container}>
       <Header title="Thông báo" iconBack />

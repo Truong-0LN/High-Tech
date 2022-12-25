@@ -55,6 +55,7 @@ const Explore = () => {
   const listCategories = useSelector(getListCategoriesSelector);
   const [listGear, setListGear] = useState(listCategories);
   const myListGear = useSelector(getListGearSelector);
+  const [valid, setValid] = useState(true);
   useEffect(() => {
     dispatch(getListCategoriesRequest());
     myListGear.length > 0 && fillProductFromRedux();
@@ -73,6 +74,7 @@ const Explore = () => {
       getAllProductsByTypeApi(type)
         .then(res => {
           setListProduct(res.data);
+          setValid(true);
         })
         .catch(e => console.log('errors ', e));
       setModalVisible(true);
@@ -159,7 +161,6 @@ const Explore = () => {
         })
         .catch(e => {
           dispatch(getChangeLoadingSuccess());
-          console.log('error ', e);
           showModal({
             title: 'Opps! có lỗi xãy ra!',
             message: e.response.data.message,
@@ -186,7 +187,7 @@ const Explore = () => {
         style={styles.body}
         showsVerticalScrollIndicator={false}>
         {listGear.map((item, index) => {
-          if (index >= listGear?.length - 1) {
+          if (item?.type > 13) {
             return;
           }
           return (
@@ -236,7 +237,11 @@ const Explore = () => {
                     style={styles.items}
                     key={item._id}>
                     <Image
-                      source={{uri: item?.images[0]}}
+                      source={{
+                        uri: valid
+                          ? item?.images[0]
+                          : 'https://i.im.ge/2022/10/14/27O9LM.ic-cpu.png',
+                      }}
                       resizeMode="cover"
                       style={styles.img}
                     />

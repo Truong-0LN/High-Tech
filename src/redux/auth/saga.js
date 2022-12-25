@@ -30,8 +30,8 @@ function* loginHandle(action) {
     const res = yield call(loginRequestApi, {
       email: payload?.email,
       password: payload?.password,
+      deviceToken: payload?.deviceToken,
     });
-    console.log('login res ', res);
     onSuccess?.(action);
     setToken(res?.data.token);
     yield put(
@@ -45,18 +45,11 @@ function* loginHandle(action) {
     );
   } catch (error) {
     yield put(loginFailed());
-    // showModal({
-    //   title: 'Đăng nhập thất bại',
-    //   message: error.response.data.message,
-    // });
     ToastAndroid.show(
       'Đăng nhập thất bại ' + error?.response.data?.message,
       ToastAndroid.LONG,
     );
-    // console.log(error);
-    // console.log('====================================');
-    // console.log(error.response.data.message);
-    // console.log('====================================');
+
   }
 }
 ///////////////////////////////// register  //////////////////////////////////////////
@@ -70,16 +63,10 @@ function* signUpHanlde(action) {
       fullname: payload?.fullname,
       phone: payload?.phone,
     });
-    console.log('res -> ', res);
     onSuccess?.(action);
     yield put(signUpSuccess(res));
   } catch (error) {
     yield put(signUpFailed());
-    console.log('signUpHanlde -> ', error);
-    // showModal({
-    //   title: 'Đăng kí thất bại!!',
-    //   message : error?.response.data?.message
-    // })
     ToastAndroid.show(
       `Đăng kí thất bại ${ error?.response.data?.message}` ,
       ToastAndroid.LONG,
@@ -95,7 +82,6 @@ function* logoutHandle(action) {
     removeToken();
     yield put(logoutSuccess());
   } catch (error) {
-    console.log('logoutHandle -> ', error);
   }
 }
 ///////////////////////////////// get user info ///////////////////////////////
@@ -104,8 +90,10 @@ function* getUserInfohandle() {
     const res = yield call(getUserInfoApi);
     yield put(getUserInfoSuccess(res.data));
   } catch (error) {
-    console.log('error ', error);
     yield put(getUserInfoFailed());
+    showModal({
+      title: 'Có lỗi gì đó xảy ra !!!',
+    })
   }
 }
 function* authSaga() {

@@ -24,12 +24,10 @@ const ConfirmPassword = props => {
     })
       .then(res => {
         setIsLoading(false);
-        console.log(res);
         ToastAndroid.show('Đổi mật khẩu thành công', ToastAndroid.SHORT);
         navigation.replace('Login');
       })
       .catch(e => {
-        console.log('e ', e);
         setIsLoading(false);
         ToastAndroid.show(
           'Đã có lỗi gì đó xảy ra! Vui lòng thử lại sau',

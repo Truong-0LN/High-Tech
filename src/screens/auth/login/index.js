@@ -16,6 +16,7 @@ import MyLoading from '../../../components/loading';
 import {getChangeLoadingRequest} from '../../../redux/loading/action';
 import {getChangeLoading} from '../../../redux/loading/selector';
 import IMAGES from '../../../assets/images';
+import messaging from '@react-native-firebase/messaging';
 const Login = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -23,9 +24,16 @@ const Login = () => {
   const loading = useSelector(getChangeLoading);
   const [isLoading, setIsLoading] = useState(loading);
   const onLogin = useCallback(
-    values => {
+    async values => {
       Keyboard.dismiss();
-      dispatch(loginRequest({email: values.email, password: values.password}));
+      const fcmToken = await messaging().getToken();
+      dispatch(
+        loginRequest({
+          email: values.email,
+          password: values.password,
+          deviceToken: fcmToken,
+        }),
+      );
       dispatch(getChangeLoadingRequest({loading: true}));
     },
     [dispatch],

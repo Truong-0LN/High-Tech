@@ -40,9 +40,10 @@ function* getProductHandle(action) {
     yield put(getProductSuccess(res?.data));
     yield put(getChangeLoadingSuccess());
   } catch (error) {
-    console.log('getProductHandle =>', error);
     yield put(getChangeLoadingSuccess());
-    // yield put(getProductFailed({error}));
+    showModal({
+      title: 'Có lỗi gì đó xảy ra !!!'
+    })
   }
 }
 ///////////////////////////////// get product by type ////////////////////////////////
@@ -53,7 +54,10 @@ function* getProductByTypeHandle(action) {
     yield put(getAllProductsByTypeSuccess({productsByType: res?.data}));
     onSuccess?.(action);
   } catch (error) {
-    console.log('getProductByTypeHandle -> ', error);
+    yield put(getChangeLoadingSuccess());
+    showModal({
+      title: 'Có lỗi gì đó xảy ra !!!'
+    })
   }
 }
 ///////////////////////////////// get all favorite product ////////////////////////////////
@@ -63,7 +67,10 @@ function* getAllFavoriteProductHandle(action) {
     const res = yield call(getMyFavoriteApi);
     yield put(getAllFavoriteProductSuccess({listFavorite: res?.data}));
   } catch (error) {
-    console.log('getAllFavoriteProductHandle -> ', error);
+    yield put(getChangeLoadingSuccess());
+    showModal({
+      title: 'Có lỗi gì đó xảy ra !!!'
+    })
   }
 }
 ///////////////////////////////// saga //////////////////////////////////////////////////

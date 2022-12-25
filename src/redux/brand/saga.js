@@ -8,8 +8,10 @@ function* getListBrandHandle() {
     const res = yield call(getAllBrandApi);
     yield put(getListBrandSuccess({listBrand: res.data}));
   } catch (error) {
-    console.log('get list brand handle error ', error);
     yield put(getListBrandFailed());
+    showModal({
+      title: 'Có lỗi gì đó xảy ra !!!'
+    });
   }
 }
 
